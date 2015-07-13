@@ -10,7 +10,7 @@ class Usuario(AbstractUser):
 	tipo_licencia = models.CharField(max_length=2)
 	propietario = models.BooleanField(default=False)
 	documento = models.IntegerField()
-	fecha_licencia = models.DateField(auto_now=True)
+	fecha_licencia = models.DateField()
 	
 
 class Vehiculo(models.Model):
