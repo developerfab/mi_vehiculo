@@ -1,0 +1,4 @@
+ngo==1.8.2
+gnureadline==6.3.3
+ipython==3.2.0
+wheel==0.24.0
