@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>Mi perfil</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	{% block cssExtends %}
+	{% endblock %}
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 text-center">
+				<br>
+				<img src="{% static 'images/publicidad.jpg'%}" width="700px">
+			</div>	
+			<div class="col-md-4 text-center">
+				<br><BR><br><BR>
+				<img src="{% static 'images/perfil.jpg'%}" width="100px" height="100px">
+				<br>
+				<a href="{% url 'miVehiculo:logout' %}" >Salir</a>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="container">
+		<ul class="nav nav-tabs">
+			<li {% if perfil %}class="active"{% endif %}><a href="{% url 'miVehiculo:home'%}">Mi perfil</a></li>
+			<li {% if not perfil %}class="active"{% endif %}><a href="{% url 'miVehiculo:impuesto'%}">Mis impuestos</a></li>
+		</ul><br>
+		{% block contenido %}
+		{% endblock %}
+	</div>
+</body>
+</html>

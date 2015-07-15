@@ -1,0 +1,32 @@
+{% extends 'baseUser.html' %}
+{% load staticfiles %}
+{% block cssExtends %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/responsive-calendar.css'%}">
+{% endblock %}
+{% block contenido %}
+	<div class="col-md-4 text-center">
+		<img src="{% static 'images/perfil.jpg' %}" width="350px" height="300px">
+		<br>
+		<h3>{{ nombre }}</h3>
+		<h6>Tipo de licencia: {{ tipoLicencia }}</h6>
+		<button class="btn btn-primary">Modificar Informacion</button>
+	</div>
+	<div class="col-md-8">
+		<table class="table table-striped">
+			<thead>
+				<th>Marca</th>
+				<th>Placa</th>
+				<th>Al dia</th>
+			</thead>
+			<tbody>
+				{% for vehiculo in vehiculos %}
+				<tr>
+					<th scope="row">{{ vehiculo.marca }}</th>
+					<td>{{ vehiculo.placa }}</td>
+					<td>SI</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

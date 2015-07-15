@@ -1,10 +1,72 @@
+{% load staticfiles %}
 <html>
 <head>
 	<title>Mi vehiculo al dia</title>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<style type="text/css">
+	body{
+		background-image: url('{% static "images/Fondo.jpg" %}');
+	}
+	.starter-template{
+		padding: 40px 15px;
+  		text-align: center;
+	}
+	</style>
 </head>
 <body>
-	{% block contenido %}
+	<nav class="navbar navbar-inverse navbar-fixed-top">	
+		<div class="container">
+			<div class="navbar-header">
+				<a href="#" class="navbar-brand">Mi vehiculo al dia</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Inicio</a></li>
+					<li>
+						<a href="#" style="padding: 10px;" >
+							<img src="{% static 'images/facebook-button.gif' %}" width="30" height="30" >
+						</a>
+					</li>
+					<li>
+						<a href="#" style="padding: 10px;" >
+							<img src="{% static 'images/TwitterButton.png' %}" width="30" height="30" >
+						</a>
+					</li>
+					<li>
+						<a href="#" style="padding: 10px;" >
+							<img src="{% static 'images/googleIcon.png' %}" width="30" height="30" >
+						</a>
+					</li>
+					<!-- seccion de login -->
+
+					
+				</ul>
+				<form class="nav navbar-nav" method="POST" action="{% url 'miVehiculo:login' %}">
+					{% csrf_token %}
+					<li><a href="" style="pointer-events: none;">User Name</a></li>
+					<li><input name="username" placeholder="Nombre de usuario" class="form-control" style="margin:7px;"/></li>
+					<li><a href="" style="pointer-events: none;">Password</a></li>
+					<li><input name="password" placeholder="Password" class="form-control" style="margin:7px;" type="password"/></li>
+					<li><input class="btn btn-success" value="Login" type="submit" style="margin:7px 50px;"/></li>
+				</form>
+			</div>
+		</div>	
+	</nav>
+	<div class="container">
+		<div class="starter-template">
+			{% block contenido %}
+			{% endblock %}
+		</div>
+		{% if mensaje %}
+
+		<div class="alert alert-warning alert-dismissible fade in" role="alert">
+	      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	      {{ mensaje }}
+    	</div>
+		{% endif %}
+	</div>
+	{% block otros %}
 	{% endblock %}
 </body>
 </html>

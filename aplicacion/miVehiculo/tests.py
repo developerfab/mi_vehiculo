@@ -1,6 +1,7 @@
 from django.test import TestCase
 from datetime import datetime
 from miVehiculo.models import *
+from utils import *
 
 # Create your tests here.
 class UserTest(TestCase):
@@ -43,6 +44,14 @@ class UserTest(TestCase):
         self.client.login(username="ozkar", password="pass")
         sesion = self.client.session['_auth_user_id']
         self.assertEqual(int(sesion), 1)
+
+    def calculo_licencia(self):
+        """
+        Test para el modulo del calculo de vencimiento de la fecha del pase
+        """
+        usuario = Usuario.objects.get(username="ozkar")
+        fecha = fechaLicencia(usuario.fecha_licencia, usuario.tipo_licencia)
+        self.assertEqual(fecha, "2015-08-15")
         
 
 class VehiculoTest(TestCase):
@@ -70,6 +79,12 @@ class VehiculoTest(TestCase):
         self.assertEqual(vehiculo_test.propietario, user2)
 
 class ImpuestoTest(TestCase):
+    def setUp(self):
+        """
+        se crea el usuario previo a la ejecucion de pruebas
+        """
+        usuario = Usuario.objects.create_user("ozkar","qwerty@qwerty.com","pass", documento=12345, fecha_licencia=datetime.strptime("15/08/2014", "%d/%m/%Y"), tipo_licencia="A2")
+
     def registro_fecha_impuesto(self):
         """
         Test para el registro de la fecha de pago de un impuesto sobre un vehiculo

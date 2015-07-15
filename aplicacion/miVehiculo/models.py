@@ -20,6 +20,7 @@ class Vehiculo(models.Model):
 	propietario = models.ForeignKey(Usuario)
 	tipo = models.CharField(max_length=60)
 	placa = models.CharField(max_length=6)
+	marca = models.CharField(max_length=50, default="")
 
 class Impuesto(models.Model):
 	"""
